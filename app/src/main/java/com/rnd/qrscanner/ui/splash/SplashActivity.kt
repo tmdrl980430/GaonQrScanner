@@ -12,13 +12,13 @@ import com.rnd.qrscanner.ui.main.MainActivity
 class SplashActivity: BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate), SplashView {
 
     override fun initAfterBinding() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            autoLogin()
-        }, 2000)
-    }
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            autoLogin()
+//        }, 2000)
 
-    private fun autoLogin() {
-        AuthService.autoLogin(this)
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivityWithClear(MainActivity::class.java)
+        }, 2000)
     }
 
     override fun onAutoLoginLoading() {

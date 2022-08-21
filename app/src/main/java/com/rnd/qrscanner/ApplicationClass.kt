@@ -17,7 +17,7 @@ class ApplicationClass : Application() {
 
         const val DEV_URL: String = "http://3.38.35.114/web";       // 테스트 서버 주소
         const val PROD_URL: String = "http://3.38.35.114/web"    // 실서버 주소
-        const val BASE_URL: String = DEV_URL
+        const val BASE_URL: String = PROD_URL
 
         lateinit var mSharedPreferences: SharedPreferences
         lateinit var retrofit: Retrofit
@@ -32,11 +32,11 @@ class ApplicationClass : Application() {
             .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
             .build()
 
-        retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+//        retrofit = Retrofit.Builder()
+//            .baseUrl(BASE_URL)
+//            .client(client)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
 
         mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
     }

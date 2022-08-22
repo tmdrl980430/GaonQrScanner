@@ -30,6 +30,8 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
             android:exported="true"/>
     </application>
 

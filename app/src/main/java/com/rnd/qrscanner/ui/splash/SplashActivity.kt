@@ -3,7 +3,6 @@ package com.rnd.qrscanner.ui.splash
 import android.os.Handler
 import android.os.Looper
 
-import com.rnd.qrscanner.data.remote.auth.AuthService
 import com.rnd.qrscanner.databinding.ActivitySplashBinding
 import com.rnd.qrscanner.ui.BaseActivity
 import com.rnd.qrscanner.ui.main.MainActivity

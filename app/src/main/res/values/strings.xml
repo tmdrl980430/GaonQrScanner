@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QrScanner</string>
+    <string name="app_name">항식당 QrScanner</string>
 
     <!--공통-->
     <string name="img_app_logo">logo image</string>

@@ -33,7 +33,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
         integrator.setPrompt("Qr Code Reader")
-        integrator.setCameraId(0)
+        integrator.setCameraId(1)
         integrator.setBeepEnabled(true)
         integrator.setBarcodeImageEnabled(true)
         integrator.setOrientationLocked(false); //세로

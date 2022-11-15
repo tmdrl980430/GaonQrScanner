@@ -1,6 +1,8 @@
 package com.rnd.qrscanner.ui.main
 
+import android.bluetooth.BluetoothAdapter.ERROR
 import android.content.Intent
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,90 +12,41 @@ import com.rnd.qrscanner.data.entities.UserTicket
 import com.rnd.qrscanner.data.remote.userTicket.UserTicketService
 import com.rnd.qrscanner.databinding.ActivityMainBinding
 import com.rnd.qrscanner.ui.BaseActivity
+import com.rnd.qrscanner.ui.breakfast.BreakFastActivity
+import com.rnd.qrscanner.ui.dinner.DinnerActivity
+import com.rnd.qrscanner.ui.lunch.LunchActivity
+import com.rnd.qrscanner.ui.lunchKorea.LunchKoreaActivity
+import com.rnd.qrscanner.ui.lunchNoodle.LunchNoodleActivity
 import org.json.JSONObject
+import java.util.*
 
 
-class MainActivity: BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) , MainView{
+class MainActivity: BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate), View.OnClickListener{
    // private lateinit var navHostFragment: NavHostFragment
 
+    private lateinit var tts: TextToSpeech
+
     override fun initAfterBinding() {
-//        navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        val navController: NavController = navHostFragment.findNavController()
-//
-//        binding.mainBottomNavigation.setupWithNavController(navController)
-        clickBtn()
+        binding.mainBreakFastBtn.setOnClickListener(this)
+        binding.mainLunchBtn.setOnClickListener(this)
+        binding.mainLunchKoreaBtn.setOnClickListener(this)
+        binding.mainLunchNoodleBtn.setOnClickListener(this)
+        binding.mainDinnerBtn.setOnClickListener(this)
 
     }
 
+    override fun onClick(v: View?) {
+        if(v == null) return
 
-    fun clickBtn(){
-
-
-        val integrator = IntentIntegrator(this)
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-        integrator.setPrompt("Qr Code Reader")
-        integrator.setCameraId(1)
-        integrator.setBeepEnabled(true)
-        integrator.setBarcodeImageEnabled(true)
-        integrator.setOrientationLocked(false); //세로
-        integrator.initiateScan()
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
-                Log.d(
-                    "result.contents",
-                    "Scanned : ${result.contents} format: ${result.formatName}"
-                )
-                Log.d("result.contents", result.contents)
-                Log.d("result.formatName", result.formatName)
-            }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
+        when(v) {
+            binding.mainBreakFastBtn -> startNextActivity(BreakFastActivity::class.java)
+            binding.mainLunchBtn -> startNextActivity(LunchActivity::class.java)
+            binding.mainLunchKoreaBtn -> startNextActivity(LunchKoreaActivity::class.java)
+            binding.mainLunchNoodleBtn -> startNextActivity(LunchNoodleActivity::class.java)
+            binding.mainDinnerBtn -> startNextActivity(DinnerActivity::class.java)
         }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-        val json = JSONObject(result.contents)
-        Log.d("json", json.toString())
-
-        val mealTicketsList = arrayListOf<MealTickets>()
-
-
-        val mealTickets  = MealTickets(json.getInt("mealTypeIdx"), json.getInt("amount"))
-
-        mealTicketsList.add(mealTickets)
-
-        Log.d("mealTickets", mealTickets.toString())
-
-        val userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
-        Log.d("userTicket", userTicket.toString())
-        UserTicketService.useUserTicket(this, userTicket)
-
-        //super.onActivityResult()
     }
 
-    override fun useUserTicketLoading() {
-        binding.mainLoadingPb.visibility = View.VISIBLE
-    }
 
-    override fun useUserTicketSuccess() {
-        binding.mainLoadingPb.visibility = View.GONE
-        Log.d("useUserTicketSuccess", "useUserTicketSuccess")
-        startActivityWithClear(MainActivity::class.java)
-    }
 
-    override fun useUserTicketFailure(code: Int, message: String) {
-        binding.mainLoadingPb.visibility = View.GONE
-    }
 }

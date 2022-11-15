@@ -15,8 +15,8 @@ class ApplicationClass : Application() {
         const val TAG: String = "TEMPLATE-APP"                      // Log, SharedPreference
         const val APP_DATABASE = "$TAG-DB"
 
-        const val DEV_URL: String = "http://3.38.35.114/web/";       // 테스트 서버 주소
-        const val PROD_URL: String = "http://3.38.35.114/web/"    // 실서버 주소
+        const val DEV_URL: String = "http://gaonnuri-env.eba-y3qcnx5y.ap-northeast-2.elasticbeanstalk.com/web/";       // 테스트 서버 주소
+        const val PROD_URL: String = "http://gaonnuri-env.eba-y3qcnx5y.ap-northeast-2.elasticbeanstalk.com/web/"    // 실서버 주소
         const val BASE_URL: String = PROD_URL
 
         lateinit var mSharedPreferences: SharedPreferences

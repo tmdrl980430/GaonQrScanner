@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_breakfast.xml" value="0.3383152173913043" />
+        <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_dinner.xml" value="0.3383152173913043" />
+        <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_lunch.xml" value="0.3383152173913043" />
+        <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_lunchkorea.xml" value="0.3383152173913043" />
+        <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_lunchnoodle.xml" value="0.3383152173913043" />
         <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_main.xml" value="0.1933876811594203" />
         <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/activity_splash.xml" value="0.2776268115942029" />
         <entry key="..\:/AndroidStudioProjects/gaon/QrScanner/app/src/main/res/layout/fragment_home.xml" value="0.1716485507246377" />
@@ -22,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,6 +5,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
+    </queries>
+
     <application
         android:name=".ApplicationClass"
         android:allowBackup="true"
@@ -30,6 +36,31 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.lunch.LunchActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.lunchKorea.LunchKoreaActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.lunchNoodle.LunchNoodleActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.breakfast.BreakFastActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.dinner.DinnerActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"
             android:exported="true"/>

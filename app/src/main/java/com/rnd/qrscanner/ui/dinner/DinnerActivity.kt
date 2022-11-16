@@ -87,7 +87,7 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
         val userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
         Log.d("userTicket", userTicket.toString())
 
-        if(json.getInt("mealTypeIdx") != 4) {
+        if(json.getInt("mealTypeIdx") == 4) {
             UserTicketService.useUserTicket(this, userTicket)
         } else {
             tts = TextToSpeech(this) {status ->

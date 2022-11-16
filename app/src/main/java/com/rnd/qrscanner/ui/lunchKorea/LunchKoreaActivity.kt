@@ -1,6 +1,7 @@
 package com.rnd.qrscanner.ui.lunchKorea
 
 import android.content.Intent
+import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -12,6 +13,7 @@ import com.rnd.qrscanner.data.remote.userTicket.UserTicketService
 import com.rnd.qrscanner.databinding.ActivityLunchkoreaBinding
 import com.rnd.qrscanner.databinding.ActivityMainBinding
 import com.rnd.qrscanner.ui.BaseActivity
+import com.rnd.qrscanner.ui.lunch.LunchActivity
 import com.rnd.qrscanner.ui.main.MainView
 import org.json.JSONObject
 import java.util.*
@@ -85,7 +87,38 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
 
         val userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
         Log.d("userTicket", userTicket.toString())
-        UserTicketService.useUserTicket(this, userTicket)
+        if(json.getInt("mealTypeIdx") == 3) {
+            UserTicketService.useUserTicket(this, userTicket)
+        } else {
+
+            tts = TextToSpeech(this) {status ->
+                if(status == TextToSpeech.SUCCESS){
+                    val speechResult = tts.setLanguage((Locale.getDefault()))
+
+                    if(speechResult == TextToSpeech.LANG_MISSING_DATA || speechResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("blog", "Error!")
+                    } else {
+                        tts.speak(
+                            "식권이 중식 한식이 아닙니다.",
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            "Hello Speech"
+                        )
+                    }
+                } else {
+                    Log.i("blog", "Error!")
+                }
+            }
+
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                startActivityWithClear(LunchKoreaActivity::class.java)
+                startNextActivity(LunchKoreaActivity::class.java)
+            }, 3000) //딜레이 타임 조절
+        }
+
+        startActivityWithClear(LunchKoreaActivity::class.java)
+        startNextActivity(LunchKoreaActivity::class.java)
 
         //super.onActivityResult()
     }
@@ -105,7 +138,7 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
                     Log.e("blog", "Error!")
                 } else {
                     tts.speak(
-                        "석식입니다.",
+                        "중식 한식입니다.",
                         TextToSpeech.QUEUE_FLUSH,
                         null,
                         "Hello Speech"

@@ -12,7 +12,6 @@ import com.rnd.qrscanner.data.entities.UserTicket
 import com.rnd.qrscanner.data.remote.userTicket.UserTicketService
 import com.rnd.qrscanner.databinding.ActivityBreakfastBinding
 import com.rnd.qrscanner.ui.BaseActivity
-import com.rnd.qrscanner.ui.dinner.DinnerActivity
 import com.rnd.qrscanner.ui.main.MainView
 import org.json.JSONObject
 import java.util.*
@@ -111,10 +110,13 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
 
             val handler = Handler()
             handler.postDelayed(Runnable {
-                startActivityWithClear(DinnerActivity::class.java)
-                startNextActivity(DinnerActivity::class.java)
+                startActivityWithClear(BreakFastActivity::class.java)
+                startNextActivity(BreakFastActivity::class.java)
             }, 3000) //딜레이 타임 조절
         }
+
+        startActivityWithClear(BreakFastActivity::class.java)
+        startNextActivity(BreakFastActivity::class.java)
 
         //super.onActivityResult()
     }
@@ -144,6 +146,12 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
                 Log.i("blog", "Error!")
             }
         }
+
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            startActivityWithClear(BreakFastActivity::class.java)
+            startNextActivity(BreakFastActivity::class.java)
+        }, 2000) //딜레이 타임 조절
 
         startActivityWithClear(BreakFastActivity::class.java)
     }

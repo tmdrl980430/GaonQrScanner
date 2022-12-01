@@ -54,10 +54,6 @@ class LunchActivity: BaseActivity<ActivityLunchBinding>(ActivityLunchBinding::in
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
                 Log.d(
                     "result.contents",
                     "Scanned : ${result.contents} format: ${result.formatName}"
@@ -65,10 +61,7 @@ class LunchActivity: BaseActivity<ActivityLunchBinding>(ActivityLunchBinding::in
                 Log.d("result.contents", result.contents)
                 Log.d("result.formatName", result.formatName)
             }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
+
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -113,12 +106,9 @@ class LunchActivity: BaseActivity<ActivityLunchBinding>(ActivityLunchBinding::in
             val handler = Handler()
             handler.postDelayed(Runnable {
                 startActivityWithClear(LunchActivity::class.java)
-                startNextActivity(LunchActivity::class.java)
             }, 3000) //딜레이 타임 조절
         }
 
-        startActivityWithClear(LunchActivity::class.java)
-        startNextActivity(LunchActivity::class.java)
 
         //super.onActivityResult()
     }
@@ -153,10 +143,8 @@ class LunchActivity: BaseActivity<ActivityLunchBinding>(ActivityLunchBinding::in
         val handler = Handler()
         handler.postDelayed(Runnable {
             startActivityWithClear(LunchActivity::class.java)
-            startNextActivity(LunchActivity::class.java)
         }, 3000) //딜레이 타임 조절
 
-        startActivityWithClear(LunchActivity::class.java)
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
@@ -165,7 +153,5 @@ class LunchActivity: BaseActivity<ActivityLunchBinding>(ActivityLunchBinding::in
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.stop()
-        tts.shutdown()
     }
 }

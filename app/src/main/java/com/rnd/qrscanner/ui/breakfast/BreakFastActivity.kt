@@ -52,10 +52,6 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
                 Log.d(
                     "result.contents",
                     "Scanned : ${result.contents} format: ${result.formatName}"
@@ -63,10 +59,7 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
                 Log.d("result.contents", result.contents)
                 Log.d("result.formatName", result.formatName)
             }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
+
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -111,12 +104,8 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
             val handler = Handler()
             handler.postDelayed(Runnable {
                 startActivityWithClear(BreakFastActivity::class.java)
-                startNextActivity(BreakFastActivity::class.java)
             }, 3000) //딜레이 타임 조절
         }
-
-        startActivityWithClear(BreakFastActivity::class.java)
-        startNextActivity(BreakFastActivity::class.java)
 
         //super.onActivityResult()
     }
@@ -150,10 +139,8 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
         val handler = Handler()
         handler.postDelayed(Runnable {
             startActivityWithClear(BreakFastActivity::class.java)
-            startNextActivity(BreakFastActivity::class.java)
         }, 2000) //딜레이 타임 조절
 
-        startActivityWithClear(BreakFastActivity::class.java)
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
@@ -162,7 +149,5 @@ class BreakFastActivity: BaseActivity<ActivityBreakfastBinding>(ActivityBreakfas
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.stop()
-        tts.shutdown()
     }
 }

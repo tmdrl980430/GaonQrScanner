@@ -25,11 +25,7 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
     private lateinit var tts: TextToSpeech
 
     override fun initAfterBinding() {
-//        navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        val navController: NavController = navHostFragment.findNavController()
-//
-//        binding.mainBottomNavigation.setupWithNavController(navController)
+
         clickBtn()
 
     }
@@ -53,10 +49,7 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
+
                 Log.d(
                     "result.contents",
                     "Scanned : ${result.contents} format: ${result.formatName}"
@@ -64,10 +57,7 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
                 Log.d("result.contents", result.contents)
                 Log.d("result.formatName", result.formatName)
             }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
+
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -112,12 +102,8 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
             val handler = Handler()
             handler.postDelayed(Runnable {
                 startActivityWithClear(LunchNoodleActivity::class.java)
-                startNextActivity(LunchNoodleActivity::class.java)
             }, 3000) //딜레이 타임 조절
         }
-
-        startActivityWithClear(LunchNoodleActivity::class.java)
-        startNextActivity(LunchNoodleActivity::class.java)
         //super.onActivityResult()
     }
 
@@ -147,7 +133,10 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
             }
         }
 
-        startActivityWithClear(LunchNoodleActivity::class.java)
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            startActivityWithClear(LunchNoodleActivity::class.java)
+        }, 3000) //딜레이 타임 조절
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
@@ -156,7 +145,5 @@ class LunchNoodleActivity: BaseActivity<ActivityLunchnoodleBinding>(ActivityLunc
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.stop()
-        tts.shutdown()
     }
 }

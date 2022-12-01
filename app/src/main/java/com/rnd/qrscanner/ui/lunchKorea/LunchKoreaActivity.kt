@@ -54,10 +54,7 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
+
                 Log.d(
                     "result.contents",
                     "Scanned : ${result.contents} format: ${result.formatName}"
@@ -65,10 +62,6 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
                 Log.d("result.contents", result.contents)
                 Log.d("result.formatName", result.formatName)
             }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -113,12 +106,8 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
             val handler = Handler()
             handler.postDelayed(Runnable {
                 startActivityWithClear(LunchKoreaActivity::class.java)
-                startNextActivity(LunchKoreaActivity::class.java)
             }, 3000) //딜레이 타임 조절
         }
-
-        startActivityWithClear(LunchKoreaActivity::class.java)
-        startNextActivity(LunchKoreaActivity::class.java)
 
         //super.onActivityResult()
     }
@@ -149,7 +138,12 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
             }
         }
 
-        startActivityWithClear(LunchKoreaActivity::class.java)
+
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            startActivityWithClear(LunchKoreaActivity::class.java)
+        }, 3000) //딜레이 타임 조절
+
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
@@ -158,7 +152,5 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.stop()
-        tts.shutdown()
     }
 }

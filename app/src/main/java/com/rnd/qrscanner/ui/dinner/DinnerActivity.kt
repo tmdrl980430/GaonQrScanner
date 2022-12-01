@@ -1,6 +1,7 @@
 package com.rnd.qrscanner.ui.dinner
 
 import android.content.Intent
+import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import com.rnd.qrscanner.data.entities.UserTicket
 import com.rnd.qrscanner.data.remote.userTicket.UserTicketService
 import com.rnd.qrscanner.databinding.ActivityDinnerBinding
 import com.rnd.qrscanner.ui.BaseActivity
+import com.rnd.qrscanner.ui.lunch.LunchActivity
 import com.rnd.qrscanner.ui.main.MainView
 import org.json.JSONObject
 import java.util.*
@@ -51,10 +53,7 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if (result.contents != null) {
-                Toast.makeText(
-                    this, "Scanned : ${result.contents} format: ${result.formatName}",
-                    Toast.LENGTH_LONG
-                ).show()
+
                 Log.d(
                     "result.contents",
                     "Scanned : ${result.contents} format: ${result.formatName}"
@@ -62,10 +61,7 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
                 Log.d("result.contents", result.contents)
                 Log.d("result.formatName", result.formatName)
             }
-//            if(result.barcodeImagePath != null) {
-//                val bitmap = BitmapFactory.decodeFile(result.barcodeImagePath)
-//                binding.scannedBitmap.setImageBitmap((bitmap))
-//            }
+
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -109,8 +105,12 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
                 }
             }
 
-            startActivityWithClear(DinnerActivity::class.java)
-            startNextActivity(DinnerActivity::class.java)
+
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                startActivityWithClear(DinnerActivity::class.java)
+            }, 3000) //딜레이 타임 조절
+
         }
 
         //super.onActivityResult()
@@ -142,40 +142,20 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
             }
         }
 
-        startActivityWithClear(DinnerActivity::class.java)
-        startNextActivity(DinnerActivity::class.java)
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            startActivityWithClear(DinnerActivity::class.java)
+        }, 3000) //딜레이 타임 조절
+
 
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
         binding.mainLoadingPb.visibility = View.GONE
-        tts = TextToSpeech(this) {status ->
-            if(status == TextToSpeech.SUCCESS){
-                val speechResult = tts.setLanguage((Locale.getDefault()))
-
-                if(speechResult == TextToSpeech.LANG_MISSING_DATA || speechResult == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("blog", "Error!")
-                } else {
-                    tts.speak(
-                        "다시 QR Code를 찍어주세요.",
-                        TextToSpeech.QUEUE_FLUSH,
-                        null,
-                        "Hello Speech"
-                    )
-                }
-            } else {
-                Log.i("blog", "Error!")
-            }
-        }
-
-        startActivityWithClear(DinnerActivity::class.java)
-        startNextActivity(DinnerActivity::class.java)
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.stop()
-        tts.shutdown()
+
     }
 }

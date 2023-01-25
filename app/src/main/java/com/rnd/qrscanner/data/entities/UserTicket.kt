@@ -10,6 +10,6 @@ data class UserTicket(
 )
 
 data class MealTickets(
-    @SerializedName("mealTypeIdx") val userIdx: Int,
-    @SerializedName("amount") val date: Int
+    @SerializedName("mealTypeIdx") val mealTypeIdx: Int,
+    @SerializedName("amount") val amount: Int
 )

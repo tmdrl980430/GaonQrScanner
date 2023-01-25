@@ -74,17 +74,28 @@ class DinnerActivity: BaseActivity<ActivityDinnerBinding>(ActivityDinnerBinding:
         val mealTicketsList = arrayListOf<MealTickets>()
 
 
-        val mealTickets  = MealTickets(json.getInt("mealTypeIdx"), json.getInt("amount"))
+        var mealTickets  = MealTickets(json.getInt("mealTypeIdx"), json.getInt("amount"))
 
         mealTicketsList.add(mealTickets)
 
         Log.d("mealTickets", mealTickets.toString())
 
-        val userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
+        var userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
         Log.d("userTicket", userTicket.toString())
 
         if(json.getInt("mealTypeIdx") == 4) {
             UserTicketService.useUserTicket(this, userTicket)
+        } else if (json.getInt("mealTypeIdx") == 10){
+            mealTickets  = MealTickets(4, json.getInt("amount"))
+
+            mealTicketsList[0] = mealTickets
+
+            Log.d("mealTickets" +
+                    "", mealTickets.toString())
+
+            userTicket = UserTicket(json.getInt("userIdx"),json.getString("date"), mealTicketsList)
+            Log.d("userTicket", userTicket.toString())
+            UserTicketService.useUserPoint(this, userTicket)
         } else {
             tts = TextToSpeech(this) {status ->
                 if(status == TextToSpeech.SUCCESS){

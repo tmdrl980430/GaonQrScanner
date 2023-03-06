@@ -50,7 +50,12 @@
             tools:replace="screenOrientation"
             android:exported="true"/>
         <activity
-            android:name=".ui.lunchNoodle.LunchNoodleActivity"
+            android:name=".ui.hotdog.HotdogActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.kimbap.KimBapActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"
             android:exported="true"/>
@@ -61,6 +66,21 @@
             android:exported="true"/>
         <activity
             android:name=".ui.dinner.DinnerActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.chicken.ChickenActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.ramen.RaMenActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.lunchNoodle.LunchNoodleActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"
             android:exported="true"/>

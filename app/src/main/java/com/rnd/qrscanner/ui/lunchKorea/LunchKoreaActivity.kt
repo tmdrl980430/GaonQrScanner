@@ -25,13 +25,7 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
     private lateinit var tts: TextToSpeech
 
     override fun initAfterBinding() {
-//        navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        val navController: NavController = navHostFragment.findNavController()
-//
-//        binding.mainBottomNavigation.setupWithNavController(navController)
         clickBtn()
-
     }
 
 
@@ -158,6 +152,26 @@ class LunchKoreaActivity: BaseActivity<ActivityLunchkoreaBinding>(ActivityLunchk
     }
 
     override fun useUserTicketFailure(code: Int, message: String) {
+        if(code == 2040){
+            tts = TextToSpeech(this) {status ->
+                if(status == TextToSpeech.SUCCESS){
+                    val speechResult = tts.setLanguage((Locale.getDefault()))
+
+                    if(speechResult == TextToSpeech.LANG_MISSING_DATA || speechResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("blog", "Error!")
+                    } else {
+                        tts.speak(
+                            "포인트가 부족합니다.",
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            "Hello Speech"
+                        )
+                    }
+                } else {
+                    Log.i("blog", "Error!")
+                }
+            }
+        }
         binding.mainLoadingPb.visibility = View.GONE
     }
 

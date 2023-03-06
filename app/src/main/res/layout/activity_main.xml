@@ -38,7 +38,6 @@
             android:text="중식 | 한식"
             tools:ignore="HardcodedText,UsingOnClickInXml" />
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_lunch_noodle_btn"
             android:layout_width="wrap_content"
@@ -53,10 +52,35 @@
             android:text="석식"
             tools:ignore="HardcodedText,UsingOnClickInXml" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_ramen_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="라면"
+            tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_kim_bap_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="김밥"
+            tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_hot_dog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="핫도그"
+            tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_chicken_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="치킨"
+            tools:ignore="HardcodedText,UsingOnClickInXml" />
 
     </LinearLayout>
-
-
 
     <ProgressBar
         android:id="@+id/main_loading_pb"
